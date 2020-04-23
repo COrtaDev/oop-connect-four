@@ -1,4 +1,17 @@
+import { Game } from "./game.js";
+
 let game = undefined;
+
+function updateUi() {
+    const boardHolder = document.getElementById("board-holder");
+    const gameName = document.getElementById("game-name");
+    if (game === undefined) {
+        boardHolder.setAttribute('class', 'is-invisible');
+    } else {
+        gameName.innerHTML = game.getName();
+        boardHolder.removeAttribute('class');
+    }
+};
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -18,6 +31,7 @@ window.addEventListener('DOMContentLoaded', event => {
         player1.value = '';
         player2.value = '';
         newGame.setAttribute('disabled', true);
+        updateUi();
     })
 
     const targets = document.getElementById('click-targets');
@@ -75,16 +89,9 @@ window.addEventListener('DOMContentLoaded', event => {
         targets.setAttribute('class', currentPlayer);
     })
 
+
 })
 
-class Game {
-    constructor(turns, player1, player2, ) {
-        this.turns = turns;
-        this.player1 = player1;
-        this.player2 = player2;
-
-    }
-}
 
 
 
