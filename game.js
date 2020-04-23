@@ -9,7 +9,3 @@ export class Game {
         return `${this.player1} vs ${this.player2}`;
     }
 }
-
-// module.exports = {
-//     Game,
-// };

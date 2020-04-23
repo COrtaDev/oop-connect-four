@@ -36,9 +36,8 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const targets = document.getElementById('click-targets');
     let turns = 0;
-    // let row = 4; // let row = columns.id; //columns.id--;
     let columns = {
-        column0: 5,//start this at 5 //if(columns[column] === -1){return}
+        column0: 5,
         column1: 5,
         column2: 5,
         column3: 5,
