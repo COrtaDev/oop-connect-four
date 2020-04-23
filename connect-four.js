@@ -1,4 +1,24 @@
+let game = undefined;
+
 window.addEventListener('DOMContentLoaded', event => {
+
+    const player1 = document.getElementById("player-1-name");
+    const player2 = document.getElementById("player-2-name");
+    const formHolder = document.getElementById("form-holder");
+    const newGame = document.getElementById("new-game");
+
+    formHolder.addEventListener('keyup', event => {
+        if (player1.value && player2.value) {
+            newGame.removeAttribute('disabled');
+        }
+    })
+
+    newGame.addEventListener('click', event => {
+        game = new Game(1, player1.value, player2.value);
+        player1.value = '';
+        player2.value = '';
+        newGame.setAttribute('disabled', true);
+    })
 
     const targets = document.getElementById('click-targets');
     let turns = 0;
@@ -57,6 +77,15 @@ window.addEventListener('DOMContentLoaded', event => {
 
 })
 
+class Game {
+    constructor(turns, player1, player2, ) {
+        this.turns = turns;
+        this.player1 = player1;
+        this.player2 = player2;
+
+    }
+}
+
 
 
 
@@ -70,4 +99,14 @@ window.addEventListener('DOMContentLoaded', event => {
 
 the graveyard
 
+    player1.addEventListener('keyup', event => {
+        if (player1.value && player2.value) {
+            newGame.removeAttribute('disabled');
+        }
+    })
+    player2.addEventListener('keyup', event => {
+        if (player1.value && player2.value) {
+            newGame.removeAttribute('disabled');
+        }
+    })
 */
