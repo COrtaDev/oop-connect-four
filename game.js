@@ -1,5 +1,5 @@
 export class Game {
-    constructor(turns, player1, player2, currentPlayer) {
+    constructor(turns, player1, player2, currentPlayer, ) {
         this.turns = turns;
         this.player1 = player1;
         this.player2 = player2;
