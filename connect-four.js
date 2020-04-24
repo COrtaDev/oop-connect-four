@@ -14,12 +14,14 @@ const updateUi = () => {
         boardHolder.classList.remove('is-invisible');
         gameName.innerHTML = game.getName();
 
-        for (let i = 0; i <= 5; i++) { // i = row index
-            for (let j = 0; j <= 6; j++) { // j = column index
+        for (let i = 0; i <= 5; i++) {
+            for (let j = 0; j <= 6; j++) {
 
                 const columnId = document.getElementById(`column-${j}`);
                 if (game.isColumnFull(j)) {
                     columnId.classList.add('full')
+                } else {
+                    columnId.classList.remove('full')
                 }
                 const square = document.getElementById(`square-${i}-${j}`);
                 square.innerHTML = ''
@@ -63,6 +65,8 @@ window.addEventListener('DOMContentLoaded', event => {
         player1.value = '';
         player2.value = '';
         newGame.setAttribute('disabled', true);
+        // targets.classList.remove('full');
+        // targets.childNodes.classList.remove('full');
         updateUi();
     })
 

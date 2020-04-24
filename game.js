@@ -20,7 +20,6 @@ export class Game {
     }
     getName() {
         if (this.winnerNumber === 3) {
-            //prevent UI from updating
             return `${this.player1} ties with ${this.player2}!`;
         } else if (this.winnerNumber === 2) {
             return `${this.player2} is the WINNER!!!`;
@@ -68,8 +67,26 @@ export class Game {
         }
     }
     checkForRowWin() {
-        //new RowWinInspector
+        const boardRow = new RowWinInspector(this.columns);
 
-        const rowCheck = new RowWinInspector(this.columns);
+        for (let j = 5; j >= 0; j--) {
+            let boardStr = '';
+            for (let i = 0; i <= 6; i++) {
+
+                let tokens = this.columns[i].tokens;
+                let rowEle = tokens[j];
+
+                if (rowEle !== null) {
+                    boardStr += rowEle;
+                } else {
+                    boardStr += 'x';
+                }
+            }
+            let result = boardRow.inspect(boardStr);
+            if (result > 0) {
+                this.winnerNumber = result;
+                return;
+            }
+        }
     }
 }
