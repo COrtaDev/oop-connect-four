@@ -1,37 +1,38 @@
 import { Game } from "./game.js";
-import { Column } from "./column.js";
+// import { Column } from "./column.js";
 
 let game = undefined;
-// let turns = 0;
 
 const updateUi = () => {
     const boardHolder = document.getElementById("board-holder");
     const gameName = document.getElementById("game-name");
-    // const piece = document.createElement('div');
     const target = document.getElementById('click-targets');
-    // debugger;
+
     if (game === undefined) {
         boardHolder.setAttribute('class', 'is-invisible');
     } else {
         gameName.innerHTML = game.getName();
         boardHolder.removeAttribute('class');
 
-        for (let i = 0; i <= 5; i++) {
-            for (let j = 0; j <= 6; j++) {
+        for (let i = 0; i <= 5; i++) { // i = row index
+            for (let j = 0; j <= 6; j++) { // j = column index
+
+                const columnId = document.getElementById(`column-${j}`);
+                if (game.isColumnFull(j)) {
+                    columnId.setAttribute('class', 'full')
+                }
                 const square = document.getElementById(`square-${i}-${j}`);
                 square.innerHTML = ''
                 const player = game.getTokenAt(i, j);
-                // console.log(player);
+
                 if (player === 1) {
                     const piece = document.createElement('div');
                     piece.setAttribute('class', 'token black');
                     square.appendChild(piece);
-                    console.log(piece);
                 } else if (player === 2) {
                     const piece = document.createElement('div');
                     piece.setAttribute('class', 'token red');
                     square.appendChild(piece);
-                    console.log(piece);
                 }
             }
         }
@@ -65,22 +66,17 @@ window.addEventListener('DOMContentLoaded', event => {
         updateUi();
     })
 
-
     let currentColumn = '';
     targets.addEventListener('click', event => {
-        //column index (0-6) column-4<--pass that value
         let currentColumn = event.target.id[7];
+        if (!event.target.id.startsWith('column-') || game.isColumnFull(currentColumn)) {
+            event.preventDefault();
+            return;
+        }
         currentColumn = parseInt(currentColumn);
-        // str
-        // int - now you can access the corresponding index in the columns array
-        // console.log(currentColumn);
         game.playInColumn(currentColumn);
         updateUi();
-
-        // console.log(event.target.id);
     })
-
-
 })
 
 

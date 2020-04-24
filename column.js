@@ -13,4 +13,11 @@ export class Column {
     getTokenAt(row) {
         return this.tokens[row];
     }
+    isFull() {
+        if (this.tokens.includes(null)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
