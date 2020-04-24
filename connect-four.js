@@ -9,17 +9,17 @@ const updateUi = () => {
     const target = document.getElementById('click-targets');
 
     if (game === undefined) {
-        boardHolder.setAttribute('class', 'is-invisible');
+        boardHolder.classList.add('class', 'is-invisible');
     } else {
+        boardHolder.classList.remove('is-invisible');
         gameName.innerHTML = game.getName();
-        boardHolder.removeAttribute('class');
 
         for (let i = 0; i <= 5; i++) { // i = row index
             for (let j = 0; j <= 6; j++) { // j = column index
 
                 const columnId = document.getElementById(`column-${j}`);
                 if (game.isColumnFull(j)) {
-                    columnId.setAttribute('class', 'full')
+                    columnId.classList.add('full')
                 }
                 const square = document.getElementById(`square-${i}-${j}`);
                 square.innerHTML = ''

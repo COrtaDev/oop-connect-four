@@ -14,8 +14,13 @@ export class Game {
             new Column('5'),
             new Column('6')
         ];
+        this.winnerNumber = 0;
     }
     getName() {
+        if (this.winnerNumber === 3) {
+            //prevent UI from updating
+            return `${this.player1} ties with ${this.player2}!`;
+        }
         return `${this.player1} vs ${this.player2}`;
     }
     playInColumn(column) {
@@ -27,11 +32,17 @@ export class Game {
         } else {
             this.currentPlayer = 1;
         }
+        this.checkForTie();
     }
     getTokenAt(row, column) {
         return this.columns[column].getTokenAt(row);
     }
     isColumnFull(column) {
         return this.columns[column].isFull();
+    }
+    checkForTie() {
+        if (this.columns.every(column => column.isFull())) {
+            this.winnerNumber = 3;
+        }
     }
 }
